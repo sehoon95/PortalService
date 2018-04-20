@@ -115,7 +115,7 @@ public class JdbcContext {
         }
     }
 
-    Product queryForGet(String sql, Object[] params) throws SQLException {
+    Product queryForObject(String sql, Object[] params) throws SQLException {
         StatementStrategy statementStrategy = connection -> {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             for (int i = 0; i < params.length; i++) {
