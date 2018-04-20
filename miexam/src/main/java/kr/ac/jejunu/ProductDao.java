@@ -30,11 +30,13 @@ public class ProductDao {
     }
 
     public void update(Product product) throws SQLException {
+        String sql = "update product set title=?, price=? where id=?";
+        Object[] params = new Object[]{product.getTitle(), product.getPrice(), product.getId()};
         StatementStrategy statementStrategy = connection -> {
-            PreparedStatement preparedStatement = connection.prepareStatement("update product set title=?, price=? where id=?");
-            preparedStatement.setString(1, product.getTitle());
-            preparedStatement.setInt(2, product.getPrice());
-            preparedStatement.setLong(3, product.getId());
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            for (int i = 0; i < params.length; i++) {
+                preparedStatement.setObject(i + 1, params[i]);
+            }
             return preparedStatement;
         };
         jdbcContext.jdbcContextForUpdate(statementStrategy);
@@ -42,7 +44,11 @@ public class ProductDao {
 
 
     public void delete(Long id) throws SQLException {
-        StatementStrategy statementStrategy = new DeleteProductStatementStrategy(id);
+        StatementStrategy statementStrategy = connection -> {
+            PreparedStatement preparedStatement = connection.prepareStatement("delete from product where id = ?");
+            preparedStatement.setLong(1, id);
+            return preparedStatement;
+        };
         jdbcContext.jdbcContextForUpdate(statementStrategy);
     }
 
