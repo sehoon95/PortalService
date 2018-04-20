@@ -1,5 +1,6 @@
 package kr.ac.jejunu;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.SQLException;
@@ -7,7 +8,12 @@ import java.sql.SQLException;
 import static org.junit.Assert.assertEquals;
 
 public class ProductDaoTest {
+
+    private ProductDao productDao;
+
+    @Before
     public void setup() {
+        productDao = new ProductDao();
     }
 
     @Test
@@ -21,5 +27,19 @@ public class ProductDaoTest {
         assertEquals(id, product.getId());
         assertEquals(title, product.getTitle());
         assertEquals(price, product.getPrice());
+    }
+
+    @Test
+    public void add() throws SQLException, ClassNotFoundException {
+        Product product = new Product();
+        product.setTitle("한라봉");
+        product.setPrice(10000);
+
+        Long id = productDao.insert(product);
+
+        Product insertedProduct = productDao.get(id);
+        assertEquals(insertedProduct.getId(), id);
+        assertEquals(insertedProduct.getTitle(), product.getTitle());
+        assertEquals(insertedProduct.getPrice(), product.getPrice());
     }
 }
