@@ -1,0 +1,78 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>글쓰기</title>
+    <script src="/jquery.min.js"></script>
+</head>
+<body>
+<div>
+    <input id="num" type="hidden" name="id"/>
+        <legend>글쓰기</legend>
+        <p>
+            <label>제목</label>
+            <input id="title" name="title"/>
+        </p>
+        <p>
+            <label>글쓴이</label>
+            <input id="id" name="id"/>
+        </p>
+        <p>
+            <label>내용</label>
+            <input id="content" name="content"/>
+        </p>
+        <p>
+            <input id="time" type="hidden" name="time"/>
+        </p>
+        <p>
+            <input id="save" type="button" value="글 올리기"/>
+        </p>
+</div>
+<script>
+    var host = '/api/board';
+
+    today = new Date;
+
+    function getUrlParams() {
+        var params = {};
+        window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (str, key, value) {
+            params[key] = value;
+        });
+        return params;
+    }
+
+    function save() {
+        var board = {
+            num: $('#num').val(),
+            id: $('#id').val(),
+            title: $('#title').val(),
+            content: $('#content').val(),
+            time: $('#time').val()
+        };
+        var method = 'POST';
+        if(board.num)
+            method = 'PUT';
+        requestData(method, board);
+        return false;
+    }
+
+    function requestData(method, data) {
+        $.ajax({
+            url: host,
+            method: method,
+            contentType: "application/json",
+            data: JSON.stringify(data)
+        }).done(function () {
+            window.location.href = 'board';
+        });
+    }
+
+    $(document).ready(function () {
+
+        $('#time').val(today.getFullYear().toString()+'-'+(today.getMonth()+1).toString()+'-'+today.getDate().toString()+' '+today.getHours().toString()+':'+today.getMinutes().toString()+':'+today.getSeconds().toString())
+
+        $('#save').on("click", save);
+    });
+
+</script>
+</body>
+</html>

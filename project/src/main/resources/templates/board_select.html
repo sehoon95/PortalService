@@ -1,0 +1,63 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>글보기</title>
+    <script src="/jquery.min.js"></script>
+</head>
+<body>
+<div>
+    <input id="num" type="hidden" name="id"/>
+    <legend>글보기</legend>
+    <p>
+        <label>제목</label>
+        <output id="title" name="title"/>
+    </p>
+    <p>
+        <label>글쓴이</label>
+        <output id="id" name="id"/>
+    </p>
+    <p>
+        <label>내용</label>
+        <output id="content" name="content"/>
+    </p>
+    <p>
+        <label>시간</label>
+        <output id="time" name="time"/>
+    </p>
+    <p>
+        <input id="goback" type="button" value="뒤로"/>
+    </p>
+</div>
+<script>
+    var host = '/api/board';
+
+    document.getElementById("goback").addEventListener("click", goback);
+
+    function goback() {
+        window.location.href = 'board';
+    }
+
+    function getUrlParams() {
+        var params = {};
+        window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (str, key, value) {
+            params[key] = value;
+        });
+        return params;
+    }
+
+    $(document).ready(function () {
+        var params = getUrlParams();
+        if (params.num) {
+            $.get(host + "/" + params.num, function (board) {
+                $('#num').val(board.num);
+                $('#id').val(board.id);
+                $('#title').val(board.title);
+                $('#content').val(board.content);
+                $('#time').val(board.time);
+
+            });
+        }
+    });
+</script>
+</body>
+</html>

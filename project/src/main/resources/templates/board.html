@@ -1,0 +1,67 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판</title>
+    <script src="/jquery.min.js"></script>
+</head>
+<body>
+<div id="Content">
+    <input id="add" type="button" value="글쓰기"/>
+    <table>
+        <thead>
+        <tr>
+            <th>제목</th>
+            <th>글쓴이</th>
+            <th>작성일</th>
+            <th>보기</th>
+            <th>삭제</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+<script>
+    var host = '/api/board';
+
+    document.getElementById("add").addEventListener("click", add);
+    function add() {
+        window.location.href = 'addboard';
+    }
+
+    $(document).ready(function () {
+        $.get(host + "/list", function (boardList) {
+            $.each(boardList, function (index, value) {
+                $("tbody").append(
+                    '\
+                    <tr><span  href="#" class="remove" data=' + value.num + '>\
+                    <td>' + value.title + '</td> \
+                    <td>' + value.id + '</td> \
+                    <td>' + value.time + '</td> \
+                    <td><a href="#" class="detail" data=' + value.num + '>보기</a></td> \
+                    <td><a href="#" class="remove" data=' + value.num + '>삭제</a></td> \
+                    </span></tr>\
+                    ');
+            });
+            $(".detail").on("click", function (e) {
+                var num = $(e.currentTarget).attr("data");
+                window.location.href = "board_select?num=" + num;
+            });
+            $(".remove").on("click", function (e) {
+                var target = e.currentTarget;
+                var num = $(target).attr("data");
+                var row = $(target).parent().parent();
+                $.ajax({
+                    url: host + '/' + num,
+                    method: 'DELETE',
+                    success: function (result) {
+                        window.location.reload();
+                    }
+                });
+            });
+        });
+    });
+
+</script>
+</body>
+</html>
