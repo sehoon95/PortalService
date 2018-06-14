@@ -50,7 +50,7 @@ public class BoardTest {
     @Test
     public void create(){
         String id = "abc";
-        String title = "hulk";
+        String title = "def";
         String content = "hong";
         String time = "2018-06-09 00:00:00";
         Board createdBoard = createBoard(id, title, content, time);

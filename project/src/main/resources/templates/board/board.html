@@ -2,11 +2,14 @@
 <head>
     <meta charset="UTF-8">
     <title>게시판</title>
+    <link href="/menu.css" rel="stylesheet" type="text/css" media="all"/>
     <script src="/jquery.min.js"></script>
 </head>
 <body>
+<div id="Header">
+    게시판
+</div>
 <div id="Content">
-    <input id="add" type="button" value="글쓰기"/>
     <table>
         <thead>
         <tr>
@@ -21,6 +24,7 @@
         </tbody>
     </table>
 </div>
+<div><input id="add" type="button" value="글쓰기"/></div>
 <script>
     var host = '/api/board';
 

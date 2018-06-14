@@ -7,25 +7,27 @@
 <body>
 <div>
     <input id="num" type="hidden" name="id"/>
-        <legend>글쓰기</legend>
-        <p>
-            <label>제목</label>
-            <input id="title" name="title"/>
-        </p>
-        <p>
-            <label>글쓴이</label>
-            <input id="id" name="id"/>
-        </p>
-        <p>
-            <label>내용</label>
-            <input id="content" name="content"/>
-        </p>
+    <legend>글쓰기</legend>
+    <table>
+        <tr>
+            <th><label>제목 :</label></th>
+            <td><input id="title" name="title"/></td>
+        </tr>
+        <tr>
+            <th><label>글쓴이 :</label></th>
+            <td><input id="id" name="id"/></td>
+        </tr>
+        <tr>
+            <th><label>내용 :</label></th>
+            <td><input id="content" name="content"/></td>
+        </tr>
         <p>
             <input id="time" type="hidden" name="time"/>
         </p>
-        <p>
-            <input id="save" type="button" value="글 올리기"/>
-        </p>
+    </table>
+</div>
+<div>
+    <input id="save" type="button" value="글 올리기"/>
 </div>
 <script>
     var host = '/api/board';
@@ -49,7 +51,7 @@
             time: $('#time').val()
         };
         var method = 'POST';
-        if(board.num)
+        if (board.num)
             method = 'PUT';
         requestData(method, board);
         return false;
@@ -68,7 +70,7 @@
 
     $(document).ready(function () {
 
-        $('#time').val(today.getFullYear().toString()+'-'+(today.getMonth()+1).toString()+'-'+today.getDate().toString()+' '+today.getHours().toString()+':'+today.getMinutes().toString()+':'+today.getSeconds().toString())
+        $('#time').val(today.getFullYear().toString() + '-' + (today.getMonth() + 1).toString() + '-' + today.getDate().toString() + ' ' + today.getHours().toString() + ':' + today.getMinutes().toString() + ':' + today.getSeconds().toString())
 
         $('#save').on("click", save);
     });
