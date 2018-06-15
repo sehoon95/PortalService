@@ -60,18 +60,18 @@ a:hover {
 	/* top and bottom borders: 1px; left and right borders: 0px */
 	line-height: 11px;
 	background-color: #eee;
-	/* Here is the ugly brilliant hack that protects IE5/Win from its own stupidity. 
-Thanks to Tantek Celik for the hack and to Eric Costello for publicizing it. 
-IE5/Win incorrectly parses the "\"}"" value, prematurely closing the style 
-declaration. The incorrect IE5/Win value is above, while the correct value is 
+	/* Here is the ugly brilliant hack that protects IE5/Win from its own stupidity.
+Thanks to Tantek Celik for the hack and to Eric Costello for publicizing it.
+IE5/Win incorrectly parses the "\"}"" value, prematurely closing the style
+declaration. The incorrect IE5/Win value is above, while the correct value is
 below. See http://glish.com/css/hacks.asp for details. */
 	voice-family: "\"}\"";
 	voice-family: inherit;
 	height: 14px; /* the correct height */
 }
 
-/* I've heard this called the "be nice to Opera 5" rule. Basically, it feeds correct 
-length values to user agents that exhibit the parsing error exploited above yet get 
+/* I've heard this called the "be nice to Opera 5" rule. Basically, it feeds correct
+length values to user agents that exhibit the parsing error exploited above yet get
 the CSS box model right and understand the CSS2 parent-child selector. ALWAYS include
 a "be nice to Opera 5" rule every time you use the Tantek Celik hack (above). */
 body>#Header {
@@ -79,7 +79,7 @@ body>#Header {
 }
 
 #Content {
-	margin: 0px 50px 50px 200px;
+	margin: 0px 50px 50px 20px;
 	padding: 10px;
 }
 
@@ -113,19 +113,15 @@ label {
 	display: block
 }
 
-.submit input {
-	margin-left: 4.5em;
-}
-
-table {
+table.entryForm {
 	border-collapse: collapse;
-	width: 50%;
+	width: 100%;
 	margin: 24px;
 	font-size: 1.1em;
 }
 
 th {
-	background: #3e83c9;
+	background: #cccccc;
 	color: #fff;
 	font-weight: bold;
 	padding: 2px 11px;
@@ -136,7 +132,7 @@ th {
 
 td {
 	padding: 6px 11px;
-	border-bottom: 1px solid #95bce2;
+	border-bottom: 1px solid #bcd4ec;
 	vertical-align: top;
 }
 
@@ -150,4 +146,21 @@ tr.alt td {
 
 tr.over td,tr:hover td {
 	background: #bcd4ec;
+}
+
+textarea{
+	width: 600px;
+	height: 200px;
+	padding: 5px;
+	border: #ccc 1px solid;
+}
+
+input{
+	margin-left: 20px
+}
+/*버튼 설정*/
+.btns{
+	margin-top : 20px;
+	margin-left: 100px;
+
 }

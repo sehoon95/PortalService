@@ -2,33 +2,37 @@
 <head>
     <meta charset="UTF-8">
     <title>글보기</title>
+    <link href="/sty.css" rel="stylesheet" type="text/css" media="all"/>
     <script src="/jquery.min.js"></script>
 </head>
 <body>
+<div id="Header">
+    글보기
+</div>
 <div>
     <input id="num" type="hidden" name="id"/>
-    <legend>글보기</legend>
     <table>
         <tr>
-            <th><label>제목 :</label></th>
+            <td><label>제목 :</label></td>
             <td><output id="title" name="title"/></td>
         </tr>
         <tr>
-            <th><label>글쓴이 :</label></th>
+            <td><label>글쓴이 :</label></td>
             <td><output id="id" name="id"/></td>
         </tr>
         <tr>
-            <th><label>내용 :</label></th>
+            <td><label>내용 :</label></td>
             <td><output id="content" name="content"/></td>
         </tr>
         <tr>
-            <th><label>시간 :</label></th>
+            <td><label>시간 :</label></td>
             <td><output id="time" type="hidden" name="time"/></td>
         <tr/>
     </table>
-    <p>
-        <input id="goback" type="button" value="뒤로"/>
-    </p>
+
+</div>
+<div class="btns">
+    <input id="goback" type="button" value="뒤로"/>
 </div>
 <script>
     var host = '/api/board';
